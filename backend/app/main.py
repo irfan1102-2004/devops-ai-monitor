@@ -1,21 +1,29 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.api.api import api_router
+from app.core.config import settings
+from app.core.exceptions import global_exception_handler
 
 app = FastAPI(
-    title="AI DevOps Monitoring API",
-    description="Backend API for AI-powered DevOps Monitoring System",
-    version="1.0.0",
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/")
-def root():
-    return {
-        "message": "Welcome to the AI DevOps Monitoring API 🚀"
-    }
+app.include_router(
+    api_router,
+    prefix=settings.API_PREFIX
+)
 
-
-@app.get("/health")
-def health_check():
-    return {
-        "status": "healthy"
-    }
+app.add_exception_handler(
+    Exception,
+    global_exception_handler
+)
