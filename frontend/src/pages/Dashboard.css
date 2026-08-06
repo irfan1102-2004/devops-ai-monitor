@@ -1,0 +1,165 @@
+.dashboard {
+  min-height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 35px;
+  font-family: Arial, sans-serif;
+}
+
+
+/* Header */
+
+.dashboard-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+
+.dashboard-line {
+  border: none;
+  height: 1px;
+  background: #334155;
+  margin-bottom: 35px;
+}
+
+
+
+/* Status Cards */
+
+.cards-container {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+}
+
+
+
+/* Chart */
+
+.chart-container {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 16px;
+  margin-top: 20px;
+  margin-bottom: 35px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+
+
+/* AI Recommendation Section */
+
+.section-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+
+.recommendations-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+.ai-card,
+.ai-warning-card {
+
+  padding: 22px;
+  border-radius: 15px;
+  font-size: 17px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,0.35);
+
+  transition: transform 0.3s ease;
+
+}
+
+
+.ai-card:hover,
+.ai-warning-card:hover {
+
+  transform: translateY(-5px);
+
+}
+
+
+.ai-card {
+
+  background: #166534;
+  border-left: 6px solid #22c55e;
+
+}
+
+
+.ai-warning-card {
+
+  background: #475569;
+  border-left: 6px solid #facc15;
+
+}
+
+
+
+/* Loading */
+
+.loading {
+
+  text-align: center;
+  margin-top: 80px;
+  font-size: 24px;
+
+}
+
+
+
+/* Error */
+
+.error-box {
+
+  background: #7f1d1d;
+  color: #fecaca;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  margin-top: 25px;
+
+  font-weight: bold;
+
+}
+
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+
+
+  .dashboard {
+
+    padding: 20px;
+
+  }
+
+
+  .dashboard-title {
+
+    font-size: 24px;
+
+  }
+
+
+  .cards-container {
+
+    flex-direction: column;
+
+  }
+
+
+}

@@ -1,0 +1,72 @@
+services:
+  backend:
+    build: .
+    container_name: devops-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: devops-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: irfan@123
+      POSTGRES_DB: devops_monitor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  prometheus:
+    image: prom/prometheus
+    container_name: devops-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - backend
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: devops-node-exporter
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+
+  loki:
+    image: grafana/loki:3.0.0
+    container_name: devops-loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/loki-config.yml
+    volumes:
+      - ./monitoring/loki/loki-config.yml:/etc/loki/loki-config.yml
+
+  promtail:
+    image: grafana/promtail:3.0.0
+    container_name: devops-promtail
+    command: -config.file=/etc/promtail/promtail-config.yml
+    volumes:
+      - ./monitoring/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - loki
+
+  grafana:
+    image: grafana/grafana
+    container_name: devops-grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+      - loki
+
+volumes:
+  postgres_data:
