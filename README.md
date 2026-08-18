@@ -4,6 +4,8 @@ An AI-powered DevOps monitoring platform that collects system metrics and applic
 
 The project combines **FastAPI, React, PostgreSQL, Docker, Prometheus, Loki, Grafana, and AI-powered analysis** into a full-stack DevOps monitoring solution.
 
+---
+
 ## 🌐 Live Demo
 
 **Frontend:**
@@ -102,7 +104,7 @@ The production backend does not depend on Prometheus or Loki being available. Th
 
 ## 🤖 AI Monitoring
 
-The AI analysis component evaluates the available infrastructure and log information and generates:
+The AI analysis component evaluates available infrastructure and log information and generates:
 
 * System health status
 * CPU utilization analysis
@@ -192,6 +194,9 @@ devops-ai-monitor/
 ├── frontend/
 │   ├── src/
 │   ├── public/
+│   ├── screenshots/
+│   │   ├── dashboard-production.png
+│   │   └── dashboard-local.png
 │   └── Dockerfile
 │
 ├── .github/
@@ -200,7 +205,6 @@ devops-ai-monitor/
 │
 ├── monitoring/
 ├── docs/
-├── screenshots/
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -242,9 +246,20 @@ This starts the local services including:
 * Promtail
 * Grafana
 
+### Start the frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
 ### Access local services
 
 ```text
+Frontend:
+http://localhost:5173
+
 Backend:
 http://localhost:8000
 
@@ -253,9 +268,12 @@ http://localhost:9090
 
 Grafana:
 http://localhost:3000
+
+Loki:
+http://localhost:3100
 ```
 
-The frontend can be started separately using the project's frontend configuration.
+The local frontend connects to the FastAPI backend and displays live infrastructure metrics collected through Prometheus and Node Exporter.
 
 ---
 
@@ -309,14 +327,15 @@ This allows the application to remain available without requiring additional clo
 
 ### Production Dashboard
 
-*Add screenshots of the working dashboard here.*
+![Production Dashboard](frontend/screenshots/dashboard-production.png)
 
-```text
-screenshots/
-├── dashboard.png
-├── ai-analysis.png
-└── monitoring.png
-```
+### Local Dashboard
+
+![Local Dashboard](frontend/screenshots/dashboard-local.png)
+
+The local dashboard demonstrates live CPU and memory monitoring through the Docker-based Prometheus and Node Exporter stack.
+
+The production dashboard demonstrates the deployed application running on Render with graceful monitoring fallback behavior.
 
 ---
 
@@ -334,7 +353,9 @@ This project demonstrates practical experience with:
 * CI/CD
 * Cloud deployment
 * Production debugging
-* Failure handling and graceful degradation
+* Failure handling
+* Graceful degradation
+* Monitoring and observability
 
 ---
 
@@ -357,7 +378,23 @@ Potential future enhancements include:
 
 **Production deployment complete. ✅**
 
-The application is available as a live portfolio project and continues to support local development with the complete Docker-based monitoring stack.
+The application is available as a live portfolio project and supports local development with the complete Docker-based monitoring stack.
+
+### Current Status
+
+* ✅ React frontend deployed
+* ✅ FastAPI backend deployed
+* ✅ PostgreSQL production database
+* ✅ AI analysis endpoint
+* ✅ Prometheus monitoring locally
+* ✅ Loki log monitoring locally
+* ✅ Grafana dashboard
+* ✅ Docker containerization
+* ✅ GitHub Actions CI/CD
+* ✅ Production deployment on Render
+* ✅ Graceful production fallback
+* ✅ Local dashboard screenshot
+* ✅ Production dashboard screenshot
 
 ---
 
