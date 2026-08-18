@@ -1,6 +1,7 @@
+import os
 import requests
 
-LOKI_URL = "http://loki:3100"
+LOKI_URL = os.getenv("LOKI_URL", "http://loki:3100")
 
 
 def query_loki(query: str, limit: int = 100):

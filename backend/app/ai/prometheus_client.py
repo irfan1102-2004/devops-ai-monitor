@@ -1,6 +1,7 @@
+import os
 import requests
 
-PROMETHEUS_URL = "http://prometheus:9090"
+PROMETHEUS_URL = os.getenv("PROMETHEUS_URL", "http://prometheus:9090")
 
 
 def query_prometheus(query: str):
